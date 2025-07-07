@@ -1,0 +1,71 @@
+/* 全体的な設定 */
+body {
+    font-family: sans-serif; /* 基本のフォント */
+    line-height: 1.6;        /* 行の高さ */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* 背景色を薄い灰色に */
+}
+
+/* ヘッダー */
+header {
+    background-color: #333; /* 背景を黒っぽい色に */
+    color: #fff;            /* 文字を白に */
+    padding: 1rem 0;
+    text-align: center;      /* 文字を中央揃えに */
+}
+
+/* ナビゲーションバー */
+nav ul {
+    list-style: none; /* リストの点を消す */
+    background-color: #444;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+nav ul li {
+    display: inline-block; /* 横並びにする */
+}
+nav ul li a {
+    text-decoration: none; /* リンクの下線を消す */
+    color: #fff;
+    padding: 15px 20px;
+    display: block;
+}
+nav ul li a:hover {
+    background-color: #555; /* マウスを乗せたら背景色を変える */
+}
+
+/* メインコンテンツとフッター */
+main, footer {
+    padding: 20px;
+    text-align: center;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    margin-top: 20px;
+}
+
+/* レスポンシブデザイン：画面幅が600px以下の場合に適用 [cite: 10] */
+@media (max-width: 600px) {
+    nav ul li {
+        display: block; /* 横並びを解除して縦並びにする */
+        width: 100%;
+    }
+}
+
+/* ★改善提案：お店の情報をカード風に見せるスタイル */
+.shop-item {
+    background-color: #fff;       /* カードの背景を白に */
+    border: 1px solid #ddd;       /* 薄い灰色の枠線を追加 */
+    border-radius: 8px;           /* カードの角を丸くする */
+    padding: 16px;                /* カードの内側に余白を作る */
+    margin-bottom: 20px;          /* カード間の下に余白を作る */
+}
+
+.shop-item img {
+    max-width: 100%;              /* 画像が親要素の幅を超えないようにする */
+    height: auto;
+    border-radius: 4px;           /* 画像の角も少し丸くする */
+}
