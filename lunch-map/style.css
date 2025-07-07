@@ -1,71 +1,118 @@
-/* 全体的な設定 */
+/* === 全体的な設定 === */
 body {
-    font-family: sans-serif; /* 基本のフォント */
-    line-height: 1.6;        /* 行の高さ */
+    /* ★Google Fontsを適用 */
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* 背景色を薄い灰色に */
+    background-color: #f8f9fa; /* 背景を少し明るく */
+    color: #343a40; /* メインの文字色を少し柔らかく */
 }
 
-/* ヘッダー */
+/* === ヘッダーとナビゲーション === */
 header {
-    background-color: #333; /* 背景を黒っぽい色に */
-    color: #fff;            /* 文字を白に */
-    padding: 1rem 0;
-    text-align: center;      /* 文字を中央揃えに */
+    /* ★名城大学のカラーをテーマ色に設定 */
+    background-color: #6f2a91; 
+    color: #fff;
+    padding: 1rem 5%; /* 横の余白を%で指定 */
+    display: flex; /* Flexboxで横並びレイアウトに */
+    justify-content: space-between; /* 両端に寄せる */
+    align-items: center; /* 上下中央揃え */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに影を付けて立体感を出す */
 }
-
-/* ナビゲーションバー */
+header h1 {
+    margin: 0;
+    font-size: 1.5rem; /* タイトルのサイズ調整 */
+}
 nav ul {
-    list-style: none; /* リストの点を消す */
-    background-color: #444;
-    text-align: center;
+    list-style: none;
     padding: 0;
     margin: 0;
-}
-nav ul li {
-    display: inline-block; /* 横並びにする */
+    display: flex; /* ナビゲーションもFlexboxで横並び */
 }
 nav ul li a {
-    text-decoration: none; /* リンクの下線を消す */
+    text-decoration: none;
     color: #fff;
-    padding: 15px 20px;
+    padding: 10px 15px;
     display: block;
+    border-radius: 5px; /* 角を少し丸く */
+    transition: background-color 0.3s; /* ホバー時のアニメーション */
 }
-nav ul li a:hover {
-    background-color: #555; /* マウスを乗せたら背景色を変える */
+nav ul li a:hover,
+nav ul li a.active { /* 現在のページを示すためのスタイル(後でJSで実装可) */
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* メインコンテンツとフッター */
-main, footer {
-    padding: 20px;
+/* === メインコンテンツエリア === */
+main {
+    max-width: 1200px; /* コンテンツの最大幅を指定 */
+    margin: 40px auto; /* 上下に余白、左右は自動で中央揃え */
+    padding: 0 20px;
     text-align: center;
 }
-footer {
-    background-color: #333;
-    color: #fff;
-    margin-top: 20px;
+
+/* === お店リストのグリッドレイアウト === */
+.shop-list {
+    display: grid;
+    /* ★画面幅に応じて列数を自動調整するグリッド */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; /* カード間の隙間 */
+    margin-top: 30px;
 }
 
-/* レスポンシブデザイン：画面幅が600px以下の場合に適用 [cite: 10] */
-@media (max-width: 600px) {
-    nav ul li {
-        display: block; /* 横並びを解除して縦並びにする */
-        width: 100%;
-    }
-}
-
-/* ★改善提案：お店の情報をカード風に見せるスタイル */
+/* === お店情報のカードデザイン === */
 .shop-item {
-    background-color: #fff;       /* カードの背景を白に */
-    border: 1px solid #ddd;       /* 薄い灰色の枠線を追加 */
-    border-radius: 8px;           /* カードの角を丸くする */
-    padding: 16px;                /* カードの内側に余白を作る */
-    margin-bottom: 20px;          /* カード間の下に余白を作る */
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* カードに影を付ける */
+    overflow: hidden; /* カードの角丸から画像がはみ出ないように */
+    text-align: left; /* カード内のテキストは左揃えに */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.shop-item:hover {
+    transform: translateY(-5px); /* マウスを乗せたら少し浮き上がる */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.shop-item img {
+    width: 100%; /* 画像の幅をカードに合わせる */
+    height: 200px; /* 画像の高さを固定 */
+    object-fit: cover; /* 画像の比率を保ったままトリミング */
+}
+.shop-item h3 {
+    margin: 0;
+    padding: 15px 20px 5px 20px;
+    color: #6f2a91;
+}
+.shop-item p {
+    margin: 0;
+    padding: 0 20px 15px 20px;
+    font-size: 0.9rem;
+    color: #6c757d;
 }
 
-.shop-item img {
-    max-width: 100%;              /* 画像が親要素の幅を超えないようにする */
-    height: auto;
-    border-radius: 4px;           /* 画像の角も少し丸くする */
+/* === フッター === */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* === レスポンシブ対応 (スマホ用) === */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* ヘッダーの要素を縦並びに */
+        padding: 20px;
+    }
+    nav {
+        margin-top: 15px;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+    nav ul li a {
+        padding: 8px 10px;
+    }
 }
