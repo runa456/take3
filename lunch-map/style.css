@@ -1,118 +1,150 @@
 /* === 全体的な設定 === */
 body {
-    /* ★Google Fontsを適用 */
     font-family: 'Noto Sans JP', sans-serif;
-    line-height: 1.7;
+    line-height: 1.8; /* 行間を少し広げて読みやすく */
     margin: 0;
-    padding: 0;
-    background-color: #f8f9fa; /* 背景を少し明るく */
-    color: #343a40; /* メインの文字色を少し柔らかく */
+    background-color: #f4f7f6; /* 背景色をより柔らかい色に */
+    color: #333; /* 文字色を標準的な黒に */
 }
 
 /* === ヘッダーとナビゲーション === */
 header {
-    /* ★名城大学のカラーをテーマ色に設定 */
-    background-color: #6f2a91; 
+    background-color: #6f2a91; /* 名城大学のカラー */
     color: #fff;
-    padding: 1rem 5%; /* 横の余白を%で指定 */
-    display: flex; /* Flexboxで横並びレイアウトに */
-    justify-content: space-between; /* 両端に寄せる */
-    align-items: center; /* 上下中央揃え */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに影を付けて立体感を出す */
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky; /* ヘッダーを画面上部に固定 */
+    top: 0;
+    z-index: 100; /* 他の要素より手前に表示 */
 }
+
 header h1 {
     margin: 0;
-    font-size: 1.5rem; /* タイトルのサイズ調整 */
+    font-size: 1.5rem;
 }
+
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* ナビゲーションもFlexboxで横並び */
+    display: flex;
 }
+
 nav ul li a {
     text-decoration: none;
     color: #fff;
-    padding: 10px 15px;
+    padding: 10px 18px; /* 少し余白を広げる */
     display: block;
-    border-radius: 5px; /* 角を少し丸く */
-    transition: background-color 0.3s; /* ホバー時のアニメーション */
+    border-radius: 5px;
+    font-weight: 700; /* 文字を太くして視認性を上げる */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-nav ul li a:hover,
-nav ul li a.active { /* 現在のページを示すためのスタイル(後でJSで実装可) */
-    background-color: rgba(255, 255, 255, 0.2);
+
+nav ul li a:hover {
+    background-color: #fff;
+    color: #6f2a91; /* ホバー時に文字色をテーマカラーに */
 }
 
 /* === メインコンテンツエリア === */
 main {
-    max-width: 1200px; /* コンテンツの最大幅を指定 */
-    margin: 40px auto; /* 上下に余白、左右は自動で中央揃え */
-    padding: 0 20px;
-    text-align: center;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
-/* === お店リストのグリッドレイアウト === */
-.shop-list {
-    display: grid;
-    /* ★画面幅に応じて列数を自動調整するグリッド */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px; /* カード間の隙間 */
-    margin-top: 30px;
+/* 各セクションのスタイル */
+main h2 {
+    font-size: 2rem;
+    color: #6f2a91;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #6f2a91;
+    padding-bottom: 10px;
 }
 
 /* === お店情報のカードデザイン === */
+.shop-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 画面幅に応じて列数を自動調整 */
+    gap: 30px;
+}
+
 .shop-item {
     background-color: #fff;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* カードに影を付ける */
-    overflow: hidden; /* カードの角丸から画像がはみ出ないように */
-    text-align: left; /* カード内のテキストは左揃えに */
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 12px; /* 角丸を大きくして柔らかい印象に */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 影を柔らかく */
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .shop-item:hover {
-    transform: translateY(-5px); /* マウスを乗せたら少し浮き上がる */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px); /* 浮き上がる動きを少し大きく */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); /* 影を濃くして立体感を強調 */
 }
+
 .shop-item img {
-    width: 100%; /* 画像の幅をカードに合わせる */
-    height: 200px; /* 画像の高さを固定 */
-    object-fit: cover; /* 画像の比率を保ったままトリミング */
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
 }
+
+.shop-item .content {
+    padding: 15px 20px 20px; /* カード内の余白を統一 */
+}
+
 .shop-item h3 {
-    margin: 0;
-    padding: 15px 20px 5px 20px;
+    margin: 0 0 10px 0; /* 見出しの下に余白 */
+    font-size: 1.25rem;
     color: #6f2a91;
 }
+
 .shop-item p {
     margin: 0;
-    padding: 0 20px 15px 20px;
     font-size: 0.9rem;
-    color: #6c757d;
+    color: #555; /* 説明文の文字色を少し濃く */
+}
+
+/* アクセス情報のスタイル */
+.shop-item p.access {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #777;
+    font-weight: 700;
+    border-left: 3px solid #ffc107; /* ★アクセントカラーで目立たせる */
+    padding-left: 10px;
 }
 
 /* === フッター === */
 footer {
     background-color: #343a40;
-    color: #fff;
+    color: #ccc; /* 文字色を少し明るく */
     text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+    padding: 30px;
+    margin-top: 60px; /* フッターの上の余白を広げる */
 }
 
 /* === レスポンシブ対応 (スマホ用) === */
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* ヘッダーの要素を縦並びに */
-        padding: 20px;
+        padding: 1rem 5%; /* ヘッダーの縦余白を戻す */
     }
-    nav {
-        margin-top: 15px;
+    nav ul {
+        /* ここは将来的にハンバーガーメニューをJSで実装するための準備 */
+        display: none; 
     }
     header h1 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
-    nav ul li a {
-        padding: 8px 10px;
+    main h2 {
+        font-size: 1.5rem;
+    }
+    /* スマートフォンではカードの最小幅を調整 */
+    .shop-list {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 }
