@@ -20,9 +20,14 @@ img {
   height: auto;
 }
 .google-map {
-  width: 100%; /* 親要素の幅いっぱいに広げる */
-  aspect-ratio: 840 / 680; /* 幅と高さの比率を維持 */
-  border: 0; /* デフォルトの枠線を消す */
+  width: 100%; /* 基本は親要素の幅いっぱいに広がる */
+  max-width: 840px; /* ただし、最大でも840pxまでしか広がらない */
+  aspect-ratio: 840 / 680;
+  border: 0;
+
+  /* 必要に応じて中央揃えにする */
+  display: block;
+  margin: 0 auto;
 }
 
 /* === ヘッダーとナビゲーション === */
