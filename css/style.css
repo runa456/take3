@@ -1,7 +1,7 @@
 /* === 全体的な設定 === */
 :root {
-    --primary-color: #6f2a91; /* 名城大学のカラー */
-    --accent-color: #ffc107; /* アクセントカラー */
+    --primary-color: #6f2a91;
+    --accent-color: #ffc107;
     --text-color: #333;
     --bg-color: #f4f7f6;
     --header-height: 60px;
@@ -11,27 +11,39 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.8;
     margin: 0;
-    padding-top: var(--header-height);
+    /* ★ 削除: ヘッダーがコンテンツに重なるため、paddingは不要 */
+    /* padding-top: var(--header-height); */
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 
 /* === ヘッダーとナビゲーション === */
 header {
-    background-color: #fff;
+    /* ★ 変更: 初期状態の背景を透明に */
+    background-color: transparent; 
     color: var(--primary-color);
     padding: 0 5%;
     height: var(--header-height);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* ★ 削除: 初期状態では影を消す */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+    /* ★ 追加: 背景色が変わるアニメーション */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
 }
+
+/* ★ 追加: スクロールされたときのヘッダーのスタイル */
+header.is-scrolled {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 
 header h1 {
     margin: 0;
@@ -64,9 +76,8 @@ header h1 a {
     color: #fff;
 }
 
-/* ハンバーガーメニューボタン */
 .menu-button {
-    display: none; /* PCでは非表示 */
+    display: none;
     font-size: 2rem;
     background: none;
     border: none;
@@ -81,9 +92,7 @@ main {
     margin: 40px auto;
     padding: 0 20px;
 }
-/* (スライダーやカードのスタイルは省略) */
 .slider-container,.shop-list,.map-container,.hero,.news { margin-bottom: 40px; }
-/* (以下、各要素のスタイルが続く) */
 
 
 /* === レスポンシブ対応 (スマホ用) === */
@@ -92,10 +101,10 @@ main {
         font-size: 1.0rem;
     }
     .menu-button {
-        display: block; /* スマホではボタンを表示 */
+        display: block;
     }
     .main-nav {
-        display: none; /* ★重要：スマホではナビゲーションを初期状態で非表示 */
+        display: none;
         position: absolute;
         top: var(--header-height);
         left: 0;
@@ -103,12 +112,11 @@ main {
         background-color: #fff;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
     }
-    /* ★重要：JSでこのクラスが付与されたら表示する */
     .main-nav.is-open {
         display: block;
     }
     .main-nav ul {
-        flex-direction: column; /* 縦並びにする */
+        flex-direction: column;
     }
     .main-nav ul li a {
         text-align: center;
