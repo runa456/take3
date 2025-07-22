@@ -1,0 +1,121 @@
+/* === 全体的な設定 === */
+:root {
+    --primary-color: #6f2a91; /* 名城大学のカラー */
+    --accent-color: #ffc107; /* アクセントカラー */
+    --text-color: #333;
+    --bg-color: #f4f7f6;
+    --header-height: 60px;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.8;
+    margin: 0;
+    padding-top: var(--header-height);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* === ヘッダーとナビゲーション === */
+header {
+    background-color: #fff;
+    color: var(--primary-color);
+    padding: 0 5%;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+header h1 a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    padding: 10px 18px;
+    display: block;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-nav ul li a:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* ハンバーガーメニューボタン */
+.menu-button {
+    display: none; /* PCでは非表示 */
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    z-index: 1100;
+}
+
+/* === メインコンテンツ（省略） === */
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+/* (スライダーやカードのスタイルは省略) */
+.slider-container,.shop-list,.map-container,.hero,.news { margin-bottom: 40px; }
+/* (以下、各要素のスタイルが続く) */
+
+
+/* === レスポンシブ対応 (スマホ用) === */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.0rem;
+    }
+    .menu-button {
+        display: block; /* スマホではボタンを表示 */
+    }
+    .main-nav {
+        display: none; /* ★重要：スマホではナビゲーションを初期状態で非表示 */
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    }
+    /* ★重要：JSでこのクラスが付与されたら表示する */
+    .main-nav.is-open {
+        display: block;
+    }
+    .main-nav ul {
+        flex-direction: column; /* 縦並びにする */
+    }
+    .main-nav ul li a {
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    main {
+        padding: 0 15px;
+    }
+}
