@@ -20,12 +20,10 @@ img {
   height: auto;
 }
 .google-map {
-  width: 100%; /* 基本は親要素の幅いっぱいに広がる */
-  max-width: 840px; /* ただし、最大でも840pxまでしか広がらない */
+  width: 100%;
+  max-width: 840px;
   aspect-ratio: 840 / 680;
   border: 0;
-
-  /* 必要に応じて中央揃えにする */
   display: block;
   margin: 0 auto;
 }
@@ -80,13 +78,13 @@ header h1 a {
 
 /* ハンバーガーメニューボタン */
 .menu-button {
-    display: none; /* PCでは非表示 */
+    display: none;
     font-size: 2rem;
     background: none;
     border: none;
     color: var(--primary-color);
     cursor: pointer;
-    z-index: 1100;
+    z-index: 1100; /* ボタンは常に最前面 */
 }
 
 /* === メインコンテンツ（省略） === */
@@ -95,9 +93,7 @@ main {
     margin: 40px auto;
     padding: 0 20px;
 }
-/* (スライダーやカードのスタイルは省略) */
 .slider-container,.shop-list,.map-container,.hero,.news { margin-bottom: 40px; }
-/* (以下、各要素のスタイルが続く) */
 
 
 /* === レスポンシブ対応 (スマホ用) === */
@@ -106,23 +102,25 @@ main {
         font-size: 1.0rem;
     }
     .menu-button {
-        display: block; /* スマホではボタンを表示 */
+        display: block;
     }
     .main-nav {
-        display: none; /* ★重要：スマホではナビゲーションを初期状態で非表示 */
+        display: none;
         position: absolute;
         top: var(--header-height);
         left: 0;
         width: 100%;
         background-color: #fff;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        /* ★★★ ここを追加 ★★★ */
+        /* メニューがスライダーより手前に来るように設定 */
+        z-index: 1050;
     }
-    /* ★重要：JSでこのクラスが付与されたら表示する */
     .main-nav.is-open {
         display: block;
     }
     .main-nav ul {
-        flex-direction: column; /* 縦並びにする */
+        flex-direction: column;
     }
     .main-nav ul li a {
         text-align: center;
