@@ -8,13 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-    <header>
-        <h1><a href="index.html">名城大学周辺のおすすめランチマップ</a></h1>
-        <button class="menu-button">☰</button>
-    </header>
 
     <style>
         /* === 画像スライダーのスタイル === */
@@ -98,7 +91,6 @@
     </nav>
 
     <main>
-        <!-- ▼▼▼ 画像スライダー ▼▼▼ -->
         <section class="slider-container">
             <div class="slider">
                 <img src="images/paseri_food.jpg" alt="洋食工房パセリの料理" class="slide active">
@@ -112,11 +104,8 @@
                 <img src="images/burassu_food.jpg" alt="ブラッスリークーの料理" class="slide">
             </div>
             <div class="slider-nav">
-                <!-- ナビゲーションドットはJavaScriptで自動生成されます -->
-            </div>
+                </div>
         </section>
-        <!-- ▲▲▲ 画像スライダー ▲▲▲ -->
-
         <section class="hero">
             <h2>今日のイチオシ！</h2>
             <p>このサイトは、名城大学周辺の安くて美味しいランチを紹介する学生のための情報サイトです。お店選びの参考にしてください！</p>
@@ -132,70 +121,7 @@
         <p>&copy; 2025 名城大学 R&Dリテラシーグループ</p>
     </footer>
 
-    <!-- 画像スライダー用のスクリプト -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            const navContainer = document.querySelector('.slider-nav');
-            let currentSlide = 0;
-            let slideInterval;
-
-            // 1. ナビゲーションドットを画像の数だけ生成
-            slides.forEach((slide, index) => {
-                const dot = document.createElement('button');
-                dot.classList.add('nav-dot');
-                if (index === 0) {
-                    dot.classList.add('active');
-                }
-                dot.dataset.slide = index;
-                navContainer.appendChild(dot);
-            });
-
-            const navDots = document.querySelectorAll('.nav-dot');
-
-            // 2. 特定のスライドを表示する関数
-            function showSlide(index) {
-                // 全てのスライドとドットを非アクティブに
-                slides.forEach(slide => slide.classList.remove('active'));
-                navDots.forEach(dot => dot.classList.remove('active'));
-
-                // 指定されたスライドとドットをアクティブに
-                slides[index].classList.add('active');
-                navDots[index].classList.add('active');
-                currentSlide = index;
-            }
-
-            // 3. 次のスライドへ移動する関数
-            function nextSlide() {
-                const newIndex = (currentSlide + 1) % slides.length;
-                showSlide(newIndex);
-            }
-
-            // 4. 自動スライドを開始する関数
-            function startSlideShow() {
-                slideInterval = setInterval(nextSlide, 5000); // 5秒ごとにnextSlideを実行
-            }
-
-            // 5. 自動スライドを停止する関数
-            function stopSlideShow() {
-                clearInterval(slideInterval);
-            }
-
-            // 6. ナビゲーションドットのクリックイベント
-            navDots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    stopSlideShow(); // クリックしたら自動再生を一旦停止
-                    const slideIndex = parseInt(dot.dataset.slide);
-                    showSlide(slideIndex);
-                    startSlideShow(); // 再び自動再生を開始
-                });
-            });
-
-            // 7. 最初のスライドショーを開始
-            startSlideShow();
-        });
-    </script>
     <script src="js/script.js"></script>
+    
 </body>
 </html>
-
