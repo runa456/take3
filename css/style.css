@@ -1,129 +1,78 @@
-/* === 全体的な設定 === */
-:root {
-    --primary-color: #6f2a91;
-    --accent-color: #ffc107;
-    --text-color: #333;
-    --bg-color: #f4f7f6;
-    --header-height: 60px;
-}
+document.addEventListener('DOMContentLoaded', function() {
 
-body {
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 1.8;
-    margin: 0;
-    /* ★ 削除: ヘッダーがコンテンツに重なるため、paddingは不要 */
-    /* padding-top: var(--header-height); */
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
+    // --- ハンバーガーメニュー機能 ---
+    const menuButton = document.querySelector('.menu-button');
+    const nav = document.querySelector('.main-nav');
 
-/* === ヘッダーとナビゲーション === */
-header {
-    /* ★ 変更: 初期状態の背景を透明に */
-    background-color: transparent; 
-    color: var(--primary-color);
-    padding: 0 5%;
-    height: var(--header-height);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* ★ 削除: 初期状態では影を消す */
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    /* ★ 追加: 背景色が変わるアニメーション */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
-}
-
-/* ★ 追加: スクロールされたときのヘッダーのスタイル */
-header.is-scrolled {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-
-header h1 {
-    margin: 0;
-    font-size: 1.2rem;
-}
-header h1 a {
-    text-decoration: none;
-    color: var(--primary-color);
-}
-
-.main-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.main-nav ul li a {
-    text-decoration: none;
-    color: var(--primary-color);
-    padding: 10px 18px;
-    display: block;
-    border-radius: 5px;
-    font-weight: 700;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.main-nav ul li a:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
-.menu-button {
-    display: none;
-    font-size: 2rem;
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    cursor: pointer;
-    z-index: 1100;
-}
-
-/* === メインコンテンツ（省略） === */
-main {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-.slider-container,.shop-list,.map-container,.hero,.news { margin-bottom: 40px; }
-
-
-/* === レスポンシブ対応 (スマホ用) === */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.0rem;
+    // ボタンとナビゲーションが存在する場合のみ、処理を実行
+    if (menuButton && nav) {
+        menuButton.addEventListener('click', function() {
+            // 'is-open' というクラスを付けたり外したりする
+            nav.classList.toggle('is-open');
+        });
     }
-    .menu-button {
-        display: block;
+
+
+    // --- トップページのスライダー機能（index.htmlでのみ動作） ---
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+        const slides = sliderContainer.querySelectorAll('.slide');
+        const navContainer = sliderContainer.querySelector('.slider-nav');
+        let currentSlide = 0;
+        let slideInterval;
+
+        if (slides.length > 0) {
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('nav-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.dataset.slide = index;
+                navContainer.appendChild(dot);
+            });
+
+            const navDots = navContainer.querySelectorAll('.nav-dot');
+
+            function showSlide(index) {
+                slides.forEach(s => s.classList.remove('active'));
+                navDots.forEach(d => d.classList.remove('active'));
+                slides[index].classList.add('active');
+                navDots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                showSlide((currentSlide + 1) % slides.length);
+            }
+
+            function startSlideShow() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            navDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.slide));
+                    startSlideShow();
+                });
+            });
+
+            startSlideShow();
+        }
     }
-    .main-nav {
-        display: none;
-        position: absolute;
-        top: var(--header-height);
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    // ★★★ ここから追加 ★★★
+    // --- スクロールでヘッダーの背景色を変更 ---
+    const header = document.querySelector('header');
+    
+    // ヘッダーが存在する場合のみ実行
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 垂直方向に50pxより多くスクロールしたら
+            if (window.scrollY > 50) {
+                header.classList.add('is-scrolled');
+            } else {
+                header.classList.remove('is-scrolled');
+            }
+        });
     }
-    .main-nav.is-open {
-        display: block;
-    }
-    .main-nav ul {
-        flex-direction: column;
-    }
-    .main-nav ul li a {
-        text-align: center;
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-    }
-    main {
-        padding: 0 15px;
-    }
-}
+    // ★★★ ここまで追加 ★★★
+});
