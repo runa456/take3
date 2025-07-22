@@ -15,6 +15,10 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 /* === ヘッダーとナビゲーション === */
 header {
