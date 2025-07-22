@@ -59,4 +59,20 @@ document.addEventListener('DOMContentLoaded', function() {
             startSlideShow();
         }
     }
+    // ★★★ ここから追加 ★★★
+    // --- スクロールでヘッダーの背景色を変更 ---
+    const header = document.querySelector('header');
+    
+    // ヘッダーが存在する場合のみ実行
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 垂直方向に50pxより多くスクロールしたら
+            if (window.scrollY > 50) {
+                header.classList.add('is-scrolled');
+            } else {
+                header.classList.remove('is-scrolled');
+            }
+        });
+    }
+    // ★★★ ここまで追加 ★★★
 });
