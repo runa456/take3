@@ -11,28 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.classList.toggle('is-open');
         });
     }
-    /* === ヘッダーを最前面に固定するスタイル === */
-header {
-    /* 画面の上部に固定する */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    /* ★★★ 他のどの要素よりも手前に表示する ★★★ */
-    z-index: 1000;
-
-    /* 背景を少し透過させて、下のスライドが透けるようにする */
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ヘッダーに影をつけて立体感を出す */
-
-    /* 中の要素を横並びにするための設定 */
-    display: flex;
-    justify-content: space-between; /* 両端に寄せる */
-    align-items: center;
-    padding: 10px 4%; /* 上下の余白10px、左右の余白4% */
-    box-sizing: border-box; /* paddingを含めて横幅100%にする */
-}
 
 
     // --- トップページのスライダー機能（index.htmlでのみ動作） ---
